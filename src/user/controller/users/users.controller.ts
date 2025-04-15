@@ -8,25 +8,24 @@ export class UsersController {
 
     @Post('user/v1/signup')
     signUp(@Body() userData){
-        console.log(userData, "here is in gateway")
         return this.natsClient.send({ cmd: 'signUpUser'}, userData);
     }
 
     @Post('user/v1/signin')
-    signIn(@Body() userData){
-        return this.natsClient.send({ cmd: 'signInUser'}, userData);
+    signIn(@Body() signInUserData){
+        return this.natsClient.send({ cmd: 'signInUser'}, signInUserData);
     }
     @Post('user/v1/send-otp')
-    sendOtp(@Body() userData){
-        return this.natsClient.send({ cmd: 'sendOtp'}, userData);
+    sendOtp(@Body() otpData){
+        return this.natsClient.send({ cmd: 'sendOtp'}, otpData);
     }
     @Post('user/v1/varify-otp')
-    varifyOtp(@Body() userData){
-        return this.natsClient.send({ cmd: 'signInUser'}, userData);
+    varifyOtp(@Body() varifyOtpData){
+        return this.natsClient.send({ cmd: 'varifyOtp'}, varifyOtpData);
     }
     @Post('user/v1/reset-password')
-    resetPassword(@Body() userData){
-        return this.natsClient.send({ cmd: 'signInUser'}, userData);
+    resetPassword(@Body() resetPasswordData){
+        return this.natsClient.send({ cmd: 'resetPassword'}, resetPasswordData);
     }
 }
 
