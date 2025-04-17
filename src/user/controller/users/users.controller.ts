@@ -10,6 +10,10 @@ export class UsersController {
     signUp(@Body() userData){
         return this.natsClient.send({ cmd: 'signUpUser'}, userData);
     }
+    @Post('user/v1/varify-signup')
+    varifySignUp(@Body() userEmailData){
+        return this.natsClient.send({ cmd: 'varifySignUpUser' }, userEmailData);
+    }
 
     @Post('user/v1/signin')
     signIn(@Body() signInUserData){
