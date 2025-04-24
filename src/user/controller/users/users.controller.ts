@@ -1,5 +1,6 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { AuthenticationGuard } from 'src/common/guard/authentication/authentication.guard';
 
 
 @Controller('users')
@@ -30,6 +31,12 @@ export class UsersController {
     @Post('user/v1/reset-password')
     resetPassword(@Body() resetPasswordData){
         return this.natsClient.send({ cmd: 'resetPassword'}, resetPasswordData);
+    }
+
+    @UseGuards(AuthenticationGuard)
+    @Get('user/v1/get-user-profile')
+    getUserProfile( ){
+        return this.natsClient.send({ cmd: 'getUserProfile'}, {});
     }
 }
 
